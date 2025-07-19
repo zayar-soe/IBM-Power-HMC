@@ -1,0 +1,22 @@
+- name: List the Power HMC current build level
+  hosts: hmcs
+  gather_facts: false
+  collections:
+  - ibm.power_hmc
+
+  tasks:
+    - name: Execute a command on HMC
+      hmc_command:
+        hmc_host: "{{ inventory_hostname }}"
+        hmc_auth:
+          username: '{{ ansible_user }}'
+          password: '{{ hmc_password }}'
+        cmd: "lshmc -V"
+
+    - name: Get HMC build level
+      hmc_command:
+        hmc_host: "{{ inventory_hostname }}"
+        hmc_auth:
+          username: '{{ ansible_user }}'
+          password: '{{ hmc_password }}'
+        cmd: "lshmc -V"
