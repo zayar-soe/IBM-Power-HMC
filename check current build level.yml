@@ -1,0 +1,17 @@
+- name: List the Power HMC current build level
+  hosts: hmcs
+  gather_facts: false
+
+  tasks:
+    - name: List the Power HMC current build level
+      ibm.power_hmc.hmc_update_upgrade:
+        hmc_host: "{{ inventory_hostname }}"
+        hmc_auth:
+          username: "{{ ansible_user }}"
+          password: "{{ hmc_password }}"
+        state: facts
+      register: hmc_info_result
+
+    - name: Show the build infuo returned
+      debug:
+        var: hmc_info_result
