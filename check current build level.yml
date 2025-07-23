@@ -1,9 +1,16 @@
+---
 - name: List the Power HMC current build level
-  hosts: hmcs
+  hosts: HMC
   gather_facts: false
-
+  connection: local
+  collections:
+    - ibm.power_hmc
+  vars:
+    inventory_hostname: 192.168.0.191
+    ansible_user: hscroot
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
   tasks:
-    - name: List the Power HMC current build level
+    - name: Get Power HMC build level (firmware info)
       ibm.power_hmc.hmc_update_upgrade:
         hmc_host: "{{ inventory_hostname }}"
         hmc_auth:
@@ -12,6 +19,7 @@
         state: facts
       register: hmc_info_result
 
-    - name: Show the build infuo returned
+    - name: Show the build info returned
       debug:
         var: hmc_info_result
+
