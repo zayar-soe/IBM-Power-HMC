@@ -1,0 +1,7 @@
+---
+plugin: ibm.power_hmc.powervm_inventory
+hmc_hosts:
+  - hmc: 192.168.0.191  
+    user: "hscroot"
+    password: ""
+
