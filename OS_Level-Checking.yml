@@ -1,0 +1,19 @@
+- name: Execute a command on HMC
+  hosts: all
+  connection: local
+  gather_facts: false
+  collections:
+   - ibm.power_hmc
+  vars:
+    inventory_hostname: 192.168.0.191
+    ansible_user: hscroot 
+    discovered_interpreter_python: /usr/bin/python3
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+  tasks:
+    - name: Execute a version check command on HMC
+      ibm.power_hmc.hmc_command:
+        hmc_host: "{{ inventory_hostname }}"
+        hmc_auth:
+          username: '{{ ansible_user }}'
+          password: '{{ hmc_password }}'
+        cmd: "lssyscfg -r lpar -m Server-8286-41A-SN847427W -F name,lpar_env,state,os_version"
