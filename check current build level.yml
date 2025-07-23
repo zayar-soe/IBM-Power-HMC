@@ -1,6 +1,6 @@
 ---
 - name: List the Power HMC current build level
-  hosts: HMC
+  hosts: all
   gather_facts: false
   connection: local
   collections:
