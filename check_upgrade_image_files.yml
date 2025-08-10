@@ -16,4 +16,15 @@
           hmc_auth:
               username: '{{ ansible_user }}'
               password: '{{ hmc_password }}'
+          build_config:
+              location_type: ibmwebsite
           action: listupg
+    - name: List all the available ptfs for update
+      hmc_update_upgrade:
+          hmc_host: '{{ inventory_hostname }}'
+          hmc_auth:
+              username: '{{ ansible_user }}'
+              password: '{{ hmc_password }}'
+          build_config:
+              location_type: ibmwebsite
+          action: listptf
