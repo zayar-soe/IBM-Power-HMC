@@ -10,13 +10,6 @@
     ansible_user: hscroot
     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
   tasks:
-    - name: Provide a list of all available image files in ibmwebsite for upgrading Power HMC
-      hmc_update_upgrade:
-          hmc_host: '{{ inventory_hostname }}'
-          hmc_auth:
-              username: '{{ ansible_user }}'
-              password: '{{ hmc_password }}'
-          action: listupg
     - name: List all the available ptfs for update
       hmc_update_upgrade:
           hmc_host: '{{ inventory_hostname }}'
@@ -24,3 +17,10 @@
               username: '{{ ansible_user }}'
               password: '{{ hmc_password }}'
           action: listptf
+    - name: Provide a list of all available image files in ibmwebsite for upgrading Power HMC
+      hmc_update_upgrade:
+          hmc_host: '{{ inventory_hostname }}'
+          hmc_auth:
+              username: '{{ ansible_user }}'
+              password: '{{ hmc_password }}'
+          action: listupg
