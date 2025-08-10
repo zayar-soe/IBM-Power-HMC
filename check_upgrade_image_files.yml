@@ -1,0 +1,19 @@
+---
+- name: List the Power HMC available image file to upgrade from ibmwebsite
+  hosts: all
+  gather_facts: false
+  connection: local
+  collections:
+    - ibm.power_hmc
+  vars:
+    inventory_hostname: 192.168.0.191
+    ansible_user: hscroot
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+  tasks:
+    - name: Provide a list of all available image files in ibmwebsite for upgrading Power HMC
+      hmc_update_upgrade:
+          hmc_host: '{{ inventory_hostname }}'
+          hmc_auth:
+              username: '{{ ansible_user }}'
+              password: '{{ hmc_password }}'
+          action: listupg
